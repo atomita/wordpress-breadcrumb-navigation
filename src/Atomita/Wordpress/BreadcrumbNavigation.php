@@ -30,40 +30,7 @@ EOD;
 	
 	static function expansion()
 	{
-		if (!function_exists('the_breadcrumb_navigation')){
-			/**
-			 * breadcrumb navigation output
-			 * @param $id int	post id
-			 */
-			function the_breadcrumb_navigation($id = null)
-			{
-				echo get_the_breadcrumb_navigation($id);
-			}
-		}
-		
-		if (!function_exists('get_the_breadcrumb_navigation')){
-			/**
-			 * make breadcrumb navigation
-			 * @param $id int	post id
-			 * @return string
-			 */
-			function get_the_breadcrumb_navigation($id = null)
-			{
-				return \Atomita\Wordpress\BreadcrumbNavigation::instance()->get($id);
-			}
-		}
-		
-		if (!function_exists('get_breadcrumbs')){
-			/**
-			 * make breadcrumb list
-			 * @param $id int	post id
-			 * @return array
-			 */
-			function get_breadcrumbs($id = null)
-			{
-				return \Atomita\Wordpress\BreadcrumbNavigation::instance()->getlist($id);
-			}
-		}
+		include rtrim(__FILE__, '.php') . DIRECTORY_SEPARATOR . 'functions.php';
 	}
 
 	/**
@@ -73,7 +40,7 @@ EOD;
 	 */
 	function get($id = null)
 	{
-		apply_filters("{$this->name}-before-get-breadcrumb-navigation");
+		do_action("{$this->name}-before-get-breadcrumb-navigation");
 
 		$around = apply_filters("{$this->name}-around-get-breadcrumb-navigation", '', $id);
 		if (!empty($around) or false === $around){
@@ -86,20 +53,21 @@ EOD;
 		return apply_filters("{$this->name}-after-get-breadcrumb-navigation", $navigation, $id);
 	}
 
-	protected function templateApplied($template, array $breadcrumbs, $level = 1, $class = '', $child = '')
+	protected function templateApplied($template, array $breadcrumbs, $level = 1, $child = '')
 	{
 		if (empty($breadcrumbs)){
 			return '';
 		}
 		$breadcrumb = (object)array_shift($breadcrumbs);
+		$last = empty($breadcrumbs) ? 'last' : '';
 		$args = apply_filters(
 			"{$this->name}-after-format-params",
 			array(
-				$template, $level, $class, $child,
+				$template, $level, $last, $child,
 				esc_url($breadcrumb->url),
 				esc_html($breadcrumb->title),
-				empty($breadcrumbs) ? '' : ' &gt;',
-				$this->templateApplied($template, $breadcrumbs, $level, empty($breadcrumbs) ? 'last' : '', 'itemprop="child"')));
+				$last ? '' : ' &gt;',
+				$this->templateApplied($template, $breadcrumbs, $level + 1, 'itemprop="child"')));
 		
 		return call_user_func_array('sprintf', $args);
 	}
@@ -112,7 +80,7 @@ EOD;
 	 */
 	function getList($id = null)
 	{
-		apply_filters("{$this->name}-before-get-breadcrumbs");
+		do_action("{$this->name}-before-get-breadcrumbs");
 
 		$around = apply_filters("{$this->name}-around-get-breadcrumbs", array(), $id);
 		if (!empty($around) or false === $around){

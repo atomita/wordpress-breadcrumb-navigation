@@ -84,20 +84,21 @@ EOD;
 		return apply_filters("{$this->name}-after-get-breadcrumb-navigation", $navigation, $id);
 	}
 
-	protected function templateApplied($template, array $breadcrumbs, $level = 1, $class = '', $child = '')
+	protected function templateApplied($template, array $breadcrumbs, $level = 1, $child = '')
 	{
 		if (empty($breadcrumbs)){
 			return '';
 		}
 		$breadcrumb = (object)array_shift($breadcrumbs);
+		$last = empty($breadcrumbs) ? 'last' : '';
 		$args = apply_filters(
 			"{$this->name}-after-format-params",
 			array(
-				$template, $level, $class, $child,
+				$template, $level, $last, $child,
 				esc_url($breadcrumb->url),
 				esc_html($breadcrumb->title),
-				empty($breadcrumbs) ? '' : ' &gt;',
-				$this->templateApplied($template, $breadcrumbs, $level + 1, empty($breadcrumbs) ? 'last' : '', 'itemprop="child"')));
+				$last ? '' : ' &gt;',
+				$this->templateApplied($template, $breadcrumbs, $level + 1, 'itemprop="child"')));
 		
 		return call_user_func_array('sprintf', $args);
 	}
