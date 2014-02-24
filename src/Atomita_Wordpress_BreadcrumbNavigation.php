@@ -8,7 +8,7 @@ class Atomita_Wordpress_BreadcrumbNavigation
 	var $name = 'breadcrumb-nabigation';
 	
 	var $template = <<<EOD
-<div class="level-%d" %s itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+<div class="level-%d %s" %s itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
 	<a href="%s" itemprop="url">
 		<span itemprop="title">%s</span>
 	</a>%s
@@ -84,7 +84,7 @@ EOD;
 		return apply_filters("{$this->name}-after-get-breadcrumb-navigation", $navigation, $id);
 	}
 
-	protected function templateApplied($template, array $breadcrumbs, $level = 1, $child = '')
+	protected function templateApplied($template, array $breadcrumbs, $level = 1, $class = '', $child = '')
 	{
 		if (empty($breadcrumbs)){
 			return '';
@@ -93,11 +93,11 @@ EOD;
 		$args = apply_filters(
 			"{$this->name}-after-format-params",
 			array(
-				$template, $level, $child,
+				$template, $level, $class, $child,
 				esc_url($breadcrumb->url),
 				esc_html($breadcrumb->title),
 				empty($breadcrumbs) ? '' : ' &gt;',
-				$this->templateApplied($template, $breadcrumbs, $level, 'itemprop="child"')));
+				$this->templateApplied($template, $breadcrumbs, $level, empty($breadcrumbs) ? 'last' : '', 'itemprop="child"')));
 		
 		return call_user_func_array('sprintf', $args);
 	}
