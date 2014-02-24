@@ -21,7 +21,7 @@ EOD;
 	{
 		static $instance;
 		if (isset($instance)){
-			$instance = new static();
+			$instance = new self();
 		}
 		return $instance;
 	}
@@ -47,7 +47,7 @@ EOD;
 			 */
 			function get_the_breadcrumb_navigation($id = null)
 			{
-				return static::instance()->get($id);
+				return Atomita_Wordpress_BreadcrumbNavigation::instance()->get($id);
 			}
 		}
 		
@@ -59,7 +59,7 @@ EOD;
 			 */
 			function get_breadcrumbs($id = null)
 			{
-				return static::instance()->getlist($id);
+				return Atomita_Wordpress_BreadcrumbNavigation::instance()->getlist($id);
 			}
 		}
 	}
