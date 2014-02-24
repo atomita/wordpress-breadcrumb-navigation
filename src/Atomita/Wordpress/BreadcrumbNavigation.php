@@ -49,7 +49,7 @@ EOD;
 			 */
 			function get_the_breadcrumb_navigation($id = null)
 			{
-				return static::instance()->get($id);
+				return \Atomita\Wordpress\BreadcrumbNavigation::instance()->get($id);
 			}
 		}
 		
@@ -61,7 +61,7 @@ EOD;
 			 */
 			function get_breadcrumbs($id = null)
 			{
-				return static::instance()->getlist($id);
+				return \Atomita\Wordpress\BreadcrumbNavigation::instance()->getlist($id);
 			}
 		}
 	}
