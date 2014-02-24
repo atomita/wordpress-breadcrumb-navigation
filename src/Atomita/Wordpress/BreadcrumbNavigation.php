@@ -22,7 +22,7 @@ EOD;
 	static function instance()
 	{
 		static $instance;
-		if (isset($instance)){
+		if (!isset($instance)){
 			$instance = new static();
 		}
 		return $instance;
