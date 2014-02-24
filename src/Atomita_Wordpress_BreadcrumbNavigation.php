@@ -71,7 +71,7 @@ EOD;
 	 */
 	function get($id = null)
 	{
-		apply_filters("{$this->name}-before-get-breadcrumb-navigation");
+		do_action("{$this->name}-before-get-breadcrumb-navigation");
 
 		$around = apply_filters("{$this->name}-around-get-breadcrumb-navigation", '', $id);
 		if (!empty($around) or false === $around){
@@ -97,7 +97,7 @@ EOD;
 				esc_url($breadcrumb->url),
 				esc_html($breadcrumb->title),
 				empty($breadcrumbs) ? '' : ' &gt;',
-				$this->templateApplied($template, $breadcrumbs, $level, empty($breadcrumbs) ? 'last' : '', 'itemprop="child"')));
+				$this->templateApplied($template, $breadcrumbs, $level + 1, empty($breadcrumbs) ? 'last' : '', 'itemprop="child"')));
 		
 		return call_user_func_array('sprintf', $args);
 	}
@@ -110,7 +110,7 @@ EOD;
 	 */
 	function getList($id = null)
 	{
-		apply_filters("{$this->name}-before-get-breadcrumbs");
+		do_action("{$this->name}-before-get-breadcrumbs");
 
 		$around = apply_filters("{$this->name}-around-get-breadcrumbs", array(), $id);
 		if (!empty($around) or false === $around){
