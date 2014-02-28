@@ -1,12 +1,12 @@
 {
-    "name": "atomita/wp-breadcrumb-navigation",
-    "keywords": ["wordpress", "theme"],
-    "license": "GPL",
-    "authors": [
-        {
-            "name": "atomita"
-        }
-    ],
+	"name": "atomita/wp-breadcrumb-navigation",
+	"keywords": ["wordpress", "theme"],
+	"license": "LGPLv3",
+	"authors": [
+	{
+		"name": "atomita"
+	}
+	],
 	"version": "0.0.6",
 	"autoload": {
 		"classmap": ["src/", "src/Atomita/Wordpress/"]
