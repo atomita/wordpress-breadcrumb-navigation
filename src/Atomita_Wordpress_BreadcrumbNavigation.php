@@ -57,12 +57,10 @@ else{
 		array(
 			'namespace Atomita\\Wordpress;',
 			'class BreadcrumbNavigation',
-			'include rtrim(__FILE__, \'.php\') . DIRECTORY_SEPARATOR . \'default.php\';',
 		),
 		array(
 			'',
 			'class Atomita_Wordpress_BreadcrumbNavigation',
-			'include dirname(__FILE__) . DIRECTORY_SEPARATOR . str_replace(\'_\', DIRECTORY_SEPARATOR, rtrim(basename(__FILE__), \'.php\')) . \'default.php\';',
 		),
 		$definition));
 }

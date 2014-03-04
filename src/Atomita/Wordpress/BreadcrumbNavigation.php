@@ -102,9 +102,9 @@ EOD;
 	 */
 	function getList($id = null)
 	{
-		do_action("{$this->name}-before-get-breadcrumbs");
+		do_action("{$this->name}-before-getlist");
 
-		$around = apply_filters("{$this->name}-around-get-breadcrumbs", array(), $id);
+		$around = apply_filters("{$this->name}-around-getlist", array(), $id);
 		if (!empty($around) or false === $around){
 			$breadcrumbs = is_array($around) ? $around : array();
 		}
@@ -176,7 +176,7 @@ EOD;
 				array_unshift($breadcrumbs, array('url' => home_url('/'), 'title' => __('HOME')));
 			}
 		}
-		return apply_filters("{$this->name}-after-get-breadcrumbs", $breadcrumbs, $id);
+		return apply_filters("{$this->name}-after-getlist", $breadcrumbs, $id);
 	}
 
 	/**
