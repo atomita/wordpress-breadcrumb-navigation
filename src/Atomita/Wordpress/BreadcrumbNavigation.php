@@ -7,9 +7,39 @@ namespace Atomita\Wordpress;
  */
 class BreadcrumbNavigation
 {
-	var $name = 'breadcrumb-nabigation';
-	
-	var $template = <<<EOD
+
+	protected $template;
+
+	/**
+	 * @param	$name	string	
+	 * @param	$template	string	
+	 */
+	function __construct($name = 'breadcrumb-nabigation', $template = null)
+	{
+		$this->name	= $name;
+		$this->template = $template;
+		if (is_null($this->template)){
+			$this->resetTemplate();
+		}
+	}
+
+	/**
+	 * @param	$template	string
+	 * @return	$this
+	 */
+	function setTemplate($template)
+	{
+		$this->template = $template;
+		return $this;
+	}
+
+	/**
+	 * set default template
+	 * @return	$this
+	 */
+	function resetTemplate()
+	{
+		$this->template = <<<EOD
 <div class="level-%d %s" %s itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
 	<a href="%s" itemprop="url">
 		<span itemprop="title">%s</span>
@@ -17,32 +47,19 @@ class BreadcrumbNavigation
 	%s
 </div>
 EOD;
-	
-	
-	static function instance()
-	{
-		static $instance;
-		if (!isset($instance)){
-			$instance = new static();
-		}
-		return $instance;
-	}
-	
-	static function expansion()
-	{
-		include rtrim(__FILE__, '.php') . DIRECTORY_SEPARATOR . 'functions.php';
+		return $this;
 	}
 
 	/**
 	 * make breadcrumb navigation
-	 * @param $id int	post id
-	 * @return string
+	 * @param	$id	int	post id
+	 * @return	string
 	 */
 	function get($id = null)
 	{
-		do_action("{$this->name}-before-get-breadcrumb-navigation");
+		do_action("{$this->name}-before-get");
 
-		$around = apply_filters("{$this->name}-around-get-breadcrumb-navigation", '', $id);
+		$around = apply_filters("{$this->name}-around-get", '', $id);
 		if (!empty($around) or false === $around){
 			$navigation = $around;
 		}
@@ -50,9 +67,15 @@ EOD;
 			$template	= apply_filters("{$this->name}-after-template", $this->template);
 			$navigation = $this->templateApplied($template, $this->getList($id));
 		}
-		return apply_filters("{$this->name}-after-get-breadcrumb-navigation", $navigation, $id);
+		return apply_filters("{$this->name}-after-get", $navigation, $id);
 	}
 
+	/**
+	 * @param	$template	string	
+	 * @param	$breadcrumbs	array	
+	 * @param	$level	int	
+	 * @param	$child	string	
+	 */
 	protected function templateApplied($template, array $breadcrumbs, $level = 1, $child = '')
 	{
 		if (empty($breadcrumbs)){
@@ -71,7 +94,6 @@ EOD;
 		
 		return call_user_func_array('sprintf', $args);
 	}
-	
 
 	/**
 	 * make breadcrumb list
@@ -157,6 +179,10 @@ EOD;
 		return apply_filters("{$this->name}-after-get-breadcrumbs", $breadcrumbs, $id);
 	}
 
+	/**
+	 * @param	$func	string	
+	 * @param	$id	int	post id
+	 */
 	private function is($func, $id)
 	{
 		static $null_only = array('front_page', 'home', 'archive', 'search');
@@ -172,5 +198,5 @@ EOD;
 		}
 		return false;
 	}
-	
+
 }
