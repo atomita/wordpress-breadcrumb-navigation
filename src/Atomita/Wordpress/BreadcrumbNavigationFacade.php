@@ -22,7 +22,7 @@ class BreadcrumbNavigationFacade extends \Atomita\Facade
 	 */
 	static function expandFunction()
 	{
-		include_once rtrim(__FILE__, '.php') . DIRECTORY_SEPARATOR . 'functions.php';
+		include_once rtrim(__FILE__, 'Facade.php') . DIRECTORY_SEPARATOR . 'functions.php';
 	}
 
 }
