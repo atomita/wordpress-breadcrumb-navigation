@@ -1,2 +1,2 @@
-wp-breadcrumb-navigation
+WordPress Breadcrumb Navigation
 ========================
