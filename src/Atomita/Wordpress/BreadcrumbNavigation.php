@@ -59,8 +59,11 @@ EOD;
 	{
 		do_action("{$this->name}-before-get");
 
-		$around = apply_filters("{$this->name}-around-get", '', $id);
-		if (!empty($around) or false === $around){
+		if (has_filter("{$this->name}-around-get")){
+			$around = apply_filters("{$this->name}-around-get", '', $id);
+		}
+		
+		if (isset($around) and is_string($around)){
 			$navigation = $around;
 		}
 		else{
@@ -104,9 +107,12 @@ EOD;
 	{
 		do_action("{$this->name}-before-getlist");
 
-		$around = apply_filters("{$this->name}-around-getlist", array(), $id);
-		if (!empty($around) or false === $around){
-			$breadcrumbs = is_array($around) ? $around : array();
+		if (has_filter("{$this->name}-around-getlist")){
+			$around = apply_filters("{$this->name}-around-getlist", array(), $id);
+		}
+		
+		if (isset($around) and is_array($around)){
+			$breadcrumbs = $around;
 		}
 		else{
 
