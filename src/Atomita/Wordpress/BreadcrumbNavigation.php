@@ -14,7 +14,7 @@ class BreadcrumbNavigation
 	 * @param	$name	string	
 	 * @param	$template	string	
 	 */
-	function __construct($name = 'breadcrumb-nabigation', $template = null)
+	function __construct($name = 'breadcrumb-navigation', $template = null)
 	{
 		$this->name	= $name;
 		$this->template = $template;
