@@ -19,7 +19,7 @@ if (!function_exists('get_the_breadcrumb_navigation')){
 	 */
 	function get_the_breadcrumb_navigation($id = null)
 	{
-		return \Atomita\Wordpress\BreadcrumbNavigationFacade::get($id);
+		return \atomita\wordpress\BreadcrumbNavigationFacade::get($id);
 	}
 }
 
@@ -31,6 +31,6 @@ if (!function_exists('get_breadcrumbs')){
 	 */
 	function get_breadcrumbs($id = null)
 	{
-		return \Atomita\Wordpress\BreadcrumbNavigationFacade::getlist($id);
+		return \atomita\wordpress\BreadcrumbNavigationFacade::getlist($id);
 	}
 }

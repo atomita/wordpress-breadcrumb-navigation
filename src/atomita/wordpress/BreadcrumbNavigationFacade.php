@@ -1,11 +1,11 @@
 <?php
 
-namespace Atomita\Wordpress;
+namespace atomita\wordpress;
 
 /**
  * Facade of BreadcrumbNavigation
  */
-class BreadcrumbNavigationFacade extends \Atomita\Facade
+class BreadcrumbNavigationFacade extends \atomita\Facade
 {
 
 	static protected function facadeInstance()

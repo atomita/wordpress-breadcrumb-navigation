@@ -7,7 +7,7 @@ if (false){
 	 * 
 	 * @author atomita
 	 */
-	class Atomita_Wordpress_BreadcrumbNavigation
+	class atomita_wordpress_BreadcrumbNavigation
 	{
 
 		/**
@@ -46,7 +46,7 @@ if (false){
 
 }
 else{
-	$file = '/Atomita/Wordpress/BreadcrumbNavigation.php';
+	$file = '/atomita/wordpress/BreadcrumbNavigation.php';
 	if ('/' != DIRECTORY_SEPARATOR){
 		$file = str_replace('/', DIRECTORY_SEPARATOR, $file);
 	}
@@ -55,12 +55,12 @@ else{
 
 	eval(str_replace(
 		array(
-			'namespace Atomita\\Wordpress;',
+			'namespace atomita\\wordpress;',
 			'class BreadcrumbNavigation',
 		),
 		array(
 			'',
-			'class Atomita_Wordpress_BreadcrumbNavigation',
+			'class atomita_wordpress_BreadcrumbNavigation',
 		),
 		$definition));
 }

@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Facade of Atomita_Wordpress_BreadcrumbNavigation
+ * Facade of atomita_wordpress_BreadcrumbNavigation
  * 
  * @author atomita
  */
-class Atomita_Wordpress_BreadcrumbNavigationFacade
+class atomita_wordpress_BreadcrumbNavigationFacade
 {
 	static protected function facadeInstance()
 	{
 		static $instance;
 		if (!isset($instance)){
-			$instance = new Atomita_Wordpress_BreadcrumbNavigation();
+			$instance = new atomita_wordpress_BreadcrumbNavigation();
 		}
 		return $instance;
 	}
@@ -46,7 +46,7 @@ class Atomita_Wordpress_BreadcrumbNavigationFacade
 			 */
 			function get_the_breadcrumb_navigation($id = null)
 			{
-				return Atomita_Wordpress_BreadcrumbNavigationFacade::get($id);
+				return atomita_wordpress_BreadcrumbNavigationFacade::get($id);
 			}
 		}
 		
@@ -58,7 +58,7 @@ class Atomita_Wordpress_BreadcrumbNavigationFacade
 			 */
 			function get_breadcrumbs($id = null)
 			{
-				return Atomita_Wordpress_BreadcrumbNavigationFacade::getlist($id);
+				return atomita_wordpress_BreadcrumbNavigationFacade::getlist($id);
 			}
 		}
 	}

@@ -12,7 +12,7 @@
 		"atomita/php-facade": "*"
 	},
 	"autoload": {
-		"classmap": ["src/", "src/Atomita/Wordpress/"]
+		"classmap": ["src/", "src/atomita/wordpress/"]
 	}
 }
 
