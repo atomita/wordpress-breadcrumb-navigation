@@ -28,15 +28,28 @@ BreadcrumbNavigationFacade::expandFunction();
 
 add_filter('breadcrumb-navigation-around-getlist', function($breadcrumb){
   $breadcrumb[] = [
-    'url' => '/',
+    'url' => 'https://example.com',
     'title => 'home'
   ];
   $breadcrumb[] = [
-    'url' => '/foo',
+    'url' => 'https://example.com/foo',
     'title => 'foo'
   ];
   return $breadcrumb;
 });
 
 the_breadcrumb_navigation(); // output breadcrumb
+
+/* output
+<div class="level-1 " itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+	<a href="https://example.com" itemprop="url">
+		<span itemprop="title">home</span>
+	</a> &gt;
+	<div class="level-2 last" itemprop="child" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+		<a href="https://example.com/foo" itemprop="url">
+			<span itemprop="title">foo</span>
+		</a>
+	</div>
+</div>
+*/
 ```
